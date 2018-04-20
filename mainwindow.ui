@@ -19,8 +19,8 @@
      <rect>
       <x>10</x>
       <y>10</y>
-      <width>229</width>
-      <height>232</height>
+      <width>266</width>
+      <height>267</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout_5">
@@ -275,8 +275,8 @@
    <widget class="QWidget" name="horizontalLayoutWidget">
     <property name="geometry">
      <rect>
-      <x>14</x>
-      <y>260</y>
+      <x>10</x>
+      <y>280</y>
       <width>251</width>
       <height>61</height>
      </rect>
@@ -301,7 +301,7 @@
      <x>0</x>
      <y>0</y>
      <width>704</width>
-     <height>21</height>
+     <height>25</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuAddons">

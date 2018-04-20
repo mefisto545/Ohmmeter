@@ -104,7 +104,7 @@ void MainWindow::on_pushButtonConnect_clicked()
             serial->setFlowControl(QSerialPort::SoftwareControl);
 
         if (serial->open(QIODevice::ReadWrite) == false) {
-            QSerialPort::SerialPortError getError;
+            QSerialPort::SerialPortError getError = QSerialPort::NoError;
             serial->error(getError);
 
             emit msg("Can't open " +

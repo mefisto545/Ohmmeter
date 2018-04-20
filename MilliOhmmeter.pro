@@ -7,6 +7,9 @@
 QT       += core gui serialport
 CONFIG   += c++11
 
+
+QMAKE_LFLAGS += -static -static-libgcc
+
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = MilliOhmmeter
