@@ -45,7 +45,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->lineEditCommand->setDisabled(true);
     ui->lineEditResponce->setEnabled(false);
 
-    serial = new QSerialPort();
+    serial = new QSerialPort(this);
 
     connect(this, SIGNAL(msg(QString)),
             this, SLOT(printMsg(QString)));
@@ -54,8 +54,6 @@ MainWindow::MainWindow(QWidget *parent) :
 MainWindow::~MainWindow()
 {
     delete ui;
-
-    delete serial;
 }
 
 void MainWindow::on_actionComUpd_triggered()
@@ -171,6 +169,7 @@ void MainWindow::on_pushButtonRecieve_clicked()
     time = QTime(0, 0, 0, 0);
     time.start();
 
+    temp = serial->readAll();
     while(serial->waitForReadyRead(ui->spinBoxTimeout->value())) {
         temp += serial->readAll();
     }
