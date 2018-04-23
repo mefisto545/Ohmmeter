@@ -13,13 +13,21 @@ class E6_25 : public QObject
     Q_OBJECT
 public:
     explicit E6_25(QObject *parent = 0);
-    QSerialPort *serial;
+    QSerialPort *serial = NULL;
 
 signals:
     void responce(QString msg);
+    void connected();
+    void disconnected();
+
 
 public slots:
     void connect(QString portName);
+    QString readData();
+    void sendData(QString msg);
+    QString sendAndRead(QString msg);
+    void disconnect();
+
 
 };
 
