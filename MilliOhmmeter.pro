@@ -7,6 +7,7 @@
 QT       += core gui serialport
 CONFIG   += c++11
 
+RC_FILE = Rc.rc
 
 QMAKE_LFLAGS += -static -static-libgcc
 
