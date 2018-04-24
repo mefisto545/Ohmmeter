@@ -7,6 +7,8 @@
 #include <QApplication>
 #include <QFile>
 #include <QDateTime>
+#include <QElapsedTimer>
+#include <QThread>
 
 class E6_25 : public QObject
 {
@@ -14,20 +16,28 @@ class E6_25 : public QObject
 public:
     explicit E6_25(QObject *parent = 0);
     QSerialPort *serial = NULL;
+    QElapsedTimer time;
+    bool run;
+    QFile* reserveFile;
 
 signals:
     void responce(QString msg);
     void connected();
     void disconnected();
+    void graphData(double resistance, double time);
+    void plotStopped();
 
 
 public slots:
+    void onCreation();
     void connect(QString portName);
     QString readData();
     void sendData(QString msg);
     QString sendAndRead(QString msg);
     void disconnect();
-
+    void plotStart();
+    void plot();
+    void plotStop();
 
 };
 

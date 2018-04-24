@@ -149,11 +149,25 @@
      </item>
     </layout>
    </widget>
+   <widget class="QPushButton" name="pushButtonPlot">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>280</y>
+      <width>231</width>
+      <height>261</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Plot</string>
+    </property>
+   </widget>
    <zorder>layoutWidget</zorder>
    <zorder>layoutWidget1</zorder>
    <zorder>layoutWidget2</zorder>
    <zorder>widgetPlot</zorder>
    <zorder>horizontalLayoutWidget</zorder>
+   <zorder>pushButtonPlot</zorder>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <widget class="QMenuBar" name="menuBar">
@@ -167,7 +181,7 @@
    </property>
    <widget class="QMenu" name="menuAddons">
     <property name="title">
-     <string>Addons</string>
+     <string>Optional</string>
     </property>
     <addaction name="actionComUpd"/>
    </widget>

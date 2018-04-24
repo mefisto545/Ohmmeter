@@ -36,12 +36,17 @@ private slots:
     void on_pushButton_clicked();
     void on_pushButton_2_clicked();
     void closeEvent(QCloseEvent *event);
+    void on_pushButtonPlot_clicked();
+    void afterStop();
+    void updateGraph(double resistance, double time);
 
 signals:
     void msg(const QString &s);
     void requestConnect(QString portName);
     void requestDisconnect();
     void requestSendAndRead(QString msg);
+    void requestPlot();
+    void requestPlotStop();
 
 private:
     Ui::MainWindow *ui;

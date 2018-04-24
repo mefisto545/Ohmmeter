@@ -13,6 +13,17 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(device, SIGNAL(responce(QString)), this, SLOT(printMsg(QString)));
     connect(this, SIGNAL(requestConnect(QString)), device, SLOT(connect(QString)));
     connect(this, SIGNAL(requestDisconnect()), device, SLOT(disconnect()));
+    connect(this, SIGNAL(requestSendAndRead(QString)), device, SLOT(sendAndRead(QString)));
+    connect(this, SIGNAL(requestPlot()), device, SLOT(plotStart()));
+    connect(this, SIGNAL(requestPlotStop()), device, SLOT(plotStop()));
+    connect(device, SIGNAL(connected()), this, SLOT(afterConnect()));
+    connect(device, SIGNAL(disconnected()), this, SLOT(afterDisconnect()));
+    connect(device, SIGNAL(graphData(double,double)), this, SLOT(updateGraph(double,double)));
+    connect(device, SIGNAL(plotStopped()), this, SLOT(afterStop()));
+    connect(tred, SIGNAL(started()), device, SLOT(onCreation()));
+
+
+
 
     device->moveToThread(tred);
     tred->start();
@@ -34,6 +45,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->lineEditCommand->setDisabled(true);
     ui->lineEditResponce->setDisabled(true);
+
+    ui->widgetPlot->addGraph();
 
     connect(this, SIGNAL(msg(QString)),
             this, SLOT(printMsg(QString)));
@@ -132,4 +145,31 @@ void MainWindow::on_pushButton_clicked()
 void MainWindow::on_pushButton_2_clicked()
 {
     emit requestSendAndRead("[-]");
+}
+
+void MainWindow::on_pushButtonPlot_clicked()
+{
+    if(ui->pushButtonPlot->text() == "Plot")
+    {
+        ui->widgetPlot->graph(0)->data().data()->clear();
+        emit requestPlot();
+        ui->pushButtonPlot->setText("Stop");
+    } else
+    {
+        emit requestPlotStop();
+    }
+}
+
+void MainWindow::afterStop()
+{
+    ui->pushButtonPlot->setText("Plot");
+}
+
+void MainWindow::updateGraph(double resistance, double time)
+{
+    ui->widgetPlot->graph(0)->addData(time,resistance);
+    ui->widgetPlot->yAxis->setRange(0, 1);
+    ui->widgetPlot->rescaleAxes();
+    ui->widgetPlot->yAxis->scaleRange(1.1);
+    ui->widgetPlot->replot();
 }
