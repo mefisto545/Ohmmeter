@@ -29,12 +29,6 @@ MainWindow::MainWindow(QWidget *parent) :
     tred->start();
 
 
-    QStringList List;
-
-    List.push_back("slow(2 Hz)");
-    List.push_back("fast(10 Hz)");
-    ui->comboBoxRate->addItems(List);
-    List.clear();
 
     on_actionComUpd_triggered();
 
@@ -172,4 +166,84 @@ void MainWindow::updateGraph(double resistance, double time)
     ui->widgetPlot->rescaleAxes();
     ui->widgetPlot->yAxis->scaleRange(1.1);
     ui->widgetPlot->replot();
+}
+
+void MainWindow::on_pushButtonFast_clicked()
+{
+    emit requestSendAndRead("[F0]");
+}
+
+void MainWindow::on_pushButtonSlow_clicked()
+{
+    emit requestSendAndRead("[F1]");
+}
+
+void MainWindow::on_pushButton_3_clicked()
+{
+    emit requestSendAndRead("[C1]");
+}
+
+void MainWindow::on_pushButton_4_clicked()
+{
+    emit requestSendAndRead("[C2]");
+}
+
+void MainWindow::on_pushButton_5_clicked()
+{
+    emit requestSendAndRead("[I1]");
+}
+
+void MainWindow::on_pushButton_6_clicked()
+{
+    emit requestSendAndRead("[I0]");
+}
+
+void MainWindow::on_pushButton_17_clicked()
+{
+    emit requestSendAndRead("[C0]");
+}
+
+void MainWindow::on_pushButton_7_clicked()
+{
+    emit requestSendAndRead("[R1]");
+}
+
+void MainWindow::on_pushButton_8_clicked()
+{
+    emit requestSendAndRead("[R2]");
+}
+
+void MainWindow::on_pushButton_9_clicked()
+{
+    emit requestSendAndRead("[R3]");
+}
+
+void MainWindow::on_pushButton_10_clicked()
+{
+    emit requestSendAndRead("[R4]");
+}
+
+void MainWindow::on_pushButton_11_clicked()
+{
+    emit requestSendAndRead("[R5]");
+}
+
+void MainWindow::on_pushButton_12_clicked()
+{
+    emit requestSendAndRead("[R6]");
+}
+
+void MainWindow::on_pushButton_13_clicked()
+{
+    emit requestSendAndRead("[R7]");
+}
+
+void MainWindow::on_pushButton_14_clicked()
+{
+    emit requestSendAndRead("[R8]");
+}
+
+void MainWindow::on_pushButton_15_clicked()
+{
+    emit requestSendAndRead("[R9]");
 }
