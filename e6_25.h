@@ -26,6 +26,8 @@ signals:
     void disconnected();
     void graphData(double resistance, double time);
     void plotStopped();
+    void checkResult(QStringList result);
+
 
 
 public slots:
@@ -38,6 +40,7 @@ public slots:
     void plotStart();
     void plot();
     void plotStop();
+    void check();
 
 };
 

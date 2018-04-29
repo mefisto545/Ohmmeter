@@ -16,6 +16,8 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(this, SIGNAL(requestSendAndRead(QString)), device, SLOT(sendAndRead(QString)));
     connect(this, SIGNAL(requestPlot()), device, SLOT(plotStart()));
     connect(this, SIGNAL(requestPlotStop()), device, SLOT(plotStop()));
+    connect(this, SIGNAL(requestCheck()), device, SLOT(check()));
+    connect(device, SIGNAL(checkResult(QStringList)), this, SLOT(afterCheck(QStringList)));
     connect(device, SIGNAL(connected()), this, SLOT(afterConnect()));
     connect(device, SIGNAL(disconnected()), this, SLOT(afterDisconnect()));
     connect(device, SIGNAL(graphData(double,double)), this, SLOT(updateGraph(double,double)));
@@ -149,12 +151,12 @@ void MainWindow::on_pushButtonRecieve_clicked()
 
 
 
-void MainWindow::on_pushButton_clicked()
+void MainWindow::on_pushButtonControlOn_clicked()
 {
     emit requestSendAndRead("[+]");
 }
 
-void MainWindow::on_pushButton_2_clicked()
+void MainWindow::on_pushButtonControlOff_clicked()
 {
     emit requestSendAndRead("[-]");
 }
@@ -196,27 +198,27 @@ void MainWindow::on_pushButtonSlow_clicked()
     emit requestSendAndRead("[F1]");
 }
 
-void MainWindow::on_pushButton_3_clicked()
+void MainWindow::on_pushButtonCompareOnGo_clicked()
 {
     emit requestSendAndRead("[C1]");
 }
 
-void MainWindow::on_pushButton_4_clicked()
+void MainWindow::on_pushButtonCompareOnNogo_clicked()
 {
     emit requestSendAndRead("[C2]");
 }
 
-void MainWindow::on_pushButton_5_clicked()
+void MainWindow::on_pushButtonNullOn_clicked()
 {
     emit requestSendAndRead("[I1]");
 }
 
-void MainWindow::on_pushButton_6_clicked()
+void MainWindow::on_pushButtonNullOff_clicked()
 {
     emit requestSendAndRead("[I0]");
 }
 
-void MainWindow::on_pushButton_17_clicked()
+void MainWindow::on_pushButtonCompareOff_clicked()
 {
     emit requestSendAndRead("[C0]");
 }
@@ -263,4 +265,122 @@ void MainWindow::on_pushButtonRange_clicked()
     }
 
     return;
+}
+
+void MainWindow::on_pushButtonCheck_clicked()
+{
+    emit requestCheck();
+}
+
+void MainWindow::afterCheck(QStringList checkResult)
+{
+    ui->pushButtonFast->setStyleSheet(this->styleSheet());
+    ui->pushButtonSlow->setStyleSheet(this->styleSheet());
+    ui->pushButtonCompareOff->setStyleSheet(this->styleSheet());
+    ui->pushButtonCompareOnGo->setStyleSheet(this->styleSheet());
+    ui->pushButtonCompareOnNogo->setStyleSheet(this->styleSheet());
+    ui->pushButtonNullOff->setStyleSheet(this->styleSheet());
+    ui->pushButtonNullOn->setStyleSheet(this->styleSheet());
+
+    QString temp;
+
+    temp = checkResult.at(0);
+    if(temp.contains("R1"))
+    {
+        ui->comboBoxRange->setCurrentIndex(0);
+    }
+    if(temp.contains("R2"))
+    {
+        ui->comboBoxRange->setCurrentIndex(1);
+    }
+    if(temp.contains("R3"))
+    {
+        ui->comboBoxRange->setCurrentIndex(2);
+    }
+    if(temp.contains("R4"))
+    {
+        ui->comboBoxRange->setCurrentIndex(3);
+    }
+    if(temp.contains("R5"))
+    {
+        ui->comboBoxRange->setCurrentIndex(4);
+    }
+    if(temp.contains("R6"))
+    {
+        ui->comboBoxRange->setCurrentIndex(5);
+    }
+    if(temp.contains("R7"))
+    {
+        ui->comboBoxRange->setCurrentIndex(6);
+    }
+    if(temp.contains("R8"))
+    {
+        ui->comboBoxRange->setCurrentIndex(7);
+    }
+    if(temp.contains("R9"))
+    {
+        ui->comboBoxRange->setCurrentIndex(8);
+    }
+
+    temp = checkResult.at(1);
+    if(temp.contains("F1"))
+    {
+        QColor col = QColor(Qt::green);
+        if(col.isValid()) {
+            QString qss = QString("background-color: %1").arg(col.name());
+            ui->pushButtonSlow->setStyleSheet(qss);
+        }
+    }
+    if(temp.contains("F0"))
+    {
+        QColor col = QColor(Qt::green);
+        if(col.isValid()) {
+            QString qss = QString("background-color: %1").arg(col.name());
+            ui->pushButtonFast->setStyleSheet(qss);
+        }
+    }
+
+    temp = checkResult.at(2);
+    if(temp.contains("I0"))
+    {
+        QColor col = QColor(Qt::green);
+        if(col.isValid()) {
+            QString qss = QString("background-color: %1").arg(col.name());
+            ui->pushButtonNullOff->setStyleSheet(qss);
+        }
+    }
+    if(temp.contains("I1"))
+    {
+        QColor col = QColor(Qt::green);
+        if(col.isValid()) {
+            QString qss = QString("background-color: %1").arg(col.name());
+            ui->pushButtonNullOn->setStyleSheet(qss);
+        }
+    }
+
+    temp =checkResult.at(3);
+    if(temp.contains("C0"))
+    {
+        QColor col = QColor(Qt::green);
+        if(col.isValid()) {
+            QString qss = QString("background-color: %1").arg(col.name());
+            ui->pushButtonCompareOff->setStyleSheet(qss);
+        }
+    }
+    if(temp.contains("C1"))
+    {
+        QColor col = QColor(Qt::green);
+        if(col.isValid()) {
+            QString qss = QString("background-color: %1").arg(col.name());
+            ui->pushButtonCompareOnGo->setStyleSheet(qss);
+        }
+    }
+    if(temp.contains("C2"))
+    {
+        QColor col = QColor(Qt::green);
+        if(col.isValid()) {
+            QString qss = QString("background-color: %1").arg(col.name());
+            ui->pushButtonCompareOnNogo->setStyleSheet(qss);
+        }
+    }
 }

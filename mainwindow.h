@@ -34,8 +34,8 @@ private slots:
     void printMsg(const QString &s);
     void on_pushButtonSend_clicked();
     void on_pushButtonRecieve_clicked();
-    void on_pushButton_clicked();
-    void on_pushButton_2_clicked();
+    void on_pushButtonControlOn_clicked();
+    void on_pushButtonControlOff_clicked();
     void closeEvent(QCloseEvent *event);
     void on_pushButtonPlot_clicked();
     void afterStop();
@@ -45,17 +45,20 @@ private slots:
 
     void on_pushButtonSlow_clicked();
 
-    void on_pushButton_3_clicked();
+    void on_pushButtonCompareOnGo_clicked();
 
-    void on_pushButton_4_clicked();
+    void on_pushButtonCompareOnNogo_clicked();
 
-    void on_pushButton_5_clicked();
+    void on_pushButtonNullOn_clicked();
 
-    void on_pushButton_6_clicked();
+    void on_pushButtonNullOff_clicked();
 
-    void on_pushButton_17_clicked();
+    void on_pushButtonCompareOff_clicked();
 
     void on_pushButtonRange_clicked();
+
+    void on_pushButtonCheck_clicked();
+    void afterCheck(QStringList checkResult);
 
 signals:
     void msg(const QString &s);
@@ -64,6 +67,7 @@ signals:
     void requestSendAndRead(QString msg);
     void requestPlot();
     void requestPlotStop();
+    void requestCheck();
 
 private:
     Ui::MainWindow *ui;

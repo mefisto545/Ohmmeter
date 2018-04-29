@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1009</width>
-    <height>497</height>
+    <height>536</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -22,6 +22,19 @@
       <width>641</width>
       <height>411</height>
      </rect>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButtonCheck">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>430</y>
+      <width>80</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Check</string>
     </property>
    </widget>
    <widget class="QWidget" name="">
@@ -66,14 +79,14 @@
      <item>
       <layout class="QVBoxLayout" name="verticalLayout_2">
        <item>
-        <widget class="QPushButton" name="pushButton">
+        <widget class="QPushButton" name="pushButtonControlOn">
          <property name="text">
           <string>Start remote control</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="pushButton_2">
+        <widget class="QPushButton" name="pushButtonControlOff">
          <property name="text">
           <string>Finish remote control</string>
          </property>
@@ -148,21 +161,21 @@
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="pushButton_3">
+        <widget class="QPushButton" name="pushButtonCompareOnGo">
          <property name="text">
           <string>On go</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="pushButton_4">
+        <widget class="QPushButton" name="pushButtonCompareOnNogo">
          <property name="text">
           <string>On nogo</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="pushButton_17">
+        <widget class="QPushButton" name="pushButtonCompareOff">
          <property name="text">
           <string>Off</string>
          </property>
@@ -180,14 +193,14 @@
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="pushButton_5">
+        <widget class="QPushButton" name="pushButtonNullOn">
          <property name="text">
           <string>On</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="pushButton_6">
+        <widget class="QPushButton" name="pushButtonNullOff">
          <property name="text">
           <string>Off</string>
          </property>
@@ -236,6 +249,7 @@
    <zorder>comboBoxRange</zorder>
    <zorder>label_6</zorder>
    <zorder>pushButtonRange</zorder>
+   <zorder>pushButtonCheck</zorder>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <widget class="QMenuBar" name="menuBar">

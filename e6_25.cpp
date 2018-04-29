@@ -179,3 +179,27 @@ void E6_25::plotStop()
     reserveFile->close();
     run = false;
 }
+
+void E6_25::check()
+{
+    QStringList result;
+    QString respond;
+
+    sendData("[?R]");
+    respond = readData();
+    result.append(respond);
+
+    sendData("[?F]");
+    respond = readData();
+    result.append(respond);
+
+    sendData("[?I]");
+    respond = readData();
+    result.append(respond);
+
+    sendData("[?C]");
+    respond = readData();
+    result.append(respond);
+
+    emit checkResult(result);
+}
