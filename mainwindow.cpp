@@ -42,12 +42,30 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->widgetPlot->addGraph();
 
+    setupRange();
+
     connect(this, SIGNAL(msg(QString)),
             this, SLOT(printMsg(QString)));
 }
 
+void MainWindow::setupRange()
+{
+    QStringList rangeList;
+    rangeList.append("20 mΩ");
+    rangeList.append("200 mΩ");
+    rangeList.append("2 Ω");
+    rangeList.append("20 Ω");
+    rangeList.append("200 Ω");
+    rangeList.append("2 kΩ");
+    rangeList.append("20 kΩ");
+    rangeList.append("200 kΩ");
+    rangeList.append("2 MΩ");
 
-void MainWindow::closeEvent(QCloseEvent *event)//При закрытии проги
+    ui->comboBoxRange->addItems(rangeList);
+}
+
+
+void MainWindow::closeEvent(QCloseEvent *event)//Перед закрытием проги
 {
     device->deleteLater();
     tred->exit();
@@ -203,47 +221,46 @@ void MainWindow::on_pushButton_17_clicked()
     emit requestSendAndRead("[C0]");
 }
 
-void MainWindow::on_pushButton_7_clicked()
+void MainWindow::on_pushButtonRange_clicked()
 {
-    emit requestSendAndRead("[R1]");
-}
+    const QString range = ui->comboBoxRange->currentText();
 
-void MainWindow::on_pushButton_8_clicked()
-{
-    emit requestSendAndRead("[R2]");
-}
+    if (range.contains("20 mΩ"))
+    {
+        emit requestSendAndRead("[R1]");
+    }
+    if (range.contains("200 mΩ"))
+    {
+        emit requestSendAndRead("[R2]");
+    }
+    if (range.contains("2 Ω"))
+    {
+        emit requestSendAndRead("[R3]");
+    }
+    if (range.contains("20 Ω"))
+    {
+        emit requestSendAndRead("[R4]");
+    }
+    if (range.contains("200 Ω"))
+    {
+        emit requestSendAndRead("[R5]");
+    }
+    if (range.contains("2 kΩ"))
+    {
+        emit requestSendAndRead("[R6]");
+    }
+    if (range.contains("20 kΩ"))
+    {
+        emit requestSendAndRead("[R7]");
+    }
+    if (range.contains("200 kΩ"))
+    {
+        emit requestSendAndRead("[R8]");
+    }
+    if (range.contains("2 MΩ"))
+    {
+        emit requestSendAndRead("[R9]");
+    }
 
-void MainWindow::on_pushButton_9_clicked()
-{
-    emit requestSendAndRead("[R3]");
-}
-
-void MainWindow::on_pushButton_10_clicked()
-{
-    emit requestSendAndRead("[R4]");
-}
-
-void MainWindow::on_pushButton_11_clicked()
-{
-    emit requestSendAndRead("[R5]");
-}
-
-void MainWindow::on_pushButton_12_clicked()
-{
-    emit requestSendAndRead("[R6]");
-}
-
-void MainWindow::on_pushButton_13_clicked()
-{
-    emit requestSendAndRead("[R7]");
-}
-
-void MainWindow::on_pushButton_14_clicked()
-{
-    emit requestSendAndRead("[R8]");
-}
-
-void MainWindow::on_pushButton_15_clicked()
-{
-    emit requestSendAndRead("[R9]");
+    return;
 }
