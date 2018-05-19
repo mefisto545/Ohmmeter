@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1009</width>
-    <height>536</height>
+    <height>549</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -37,7 +37,7 @@
      <string>Check</string>
     </property>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -238,18 +238,127 @@
      </item>
     </layout>
    </widget>
+   <widget class="QWidget" name="verticalLayoutWidget_2">
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>420</y>
+      <width>360</width>
+      <height>83</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="verticalLayout_5">
+     <item>
+      <widget class="QLabel" name="label_7">
+       <property name="text">
+        <string>                                              AVR Atmega8</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout_7">
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_13">
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_6">
+           <item>
+            <widget class="QLabel" name="label_5">
+             <property name="text">
+              <string>PortName</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QComboBox" name="comboBoxPortName_2"/>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QVBoxLayout" name="verticalLayout_6">
+           <item>
+            <widget class="QPushButton" name="pushButtonConnect_2">
+             <property name="text">
+              <string>Connect</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QVBoxLayout" name="verticalLayout_8">
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_14">
+           <item>
+            <widget class="QLineEdit" name="lineEditCommand_2"/>
+           </item>
+           <item>
+            <widget class="QPushButton" name="pushButtonSend_2">
+             <property name="text">
+              <string>Send</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QVBoxLayout" name="verticalLayout_7">
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_15">
+             <item>
+              <widget class="QLineEdit" name="lineEditResponce_2"/>
+             </item>
+             <item>
+              <widget class="QPushButton" name="pushButtonRecieve_2">
+               <property name="text">
+                <string>Recieve</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QPushButton" name="pushButton">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>460</y>
+      <width>81</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Open graphs</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="checkBox">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>490</y>
+      <width>91</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Use MultiMode</string>
+    </property>
+   </widget>
    <zorder>layoutWidget</zorder>
-   <zorder>layoutWidget1</zorder>
-   <zorder>layoutWidget2</zorder>
    <zorder>widgetPlot</zorder>
-   <zorder>horizontalLayoutWidget</zorder>
-   <zorder>pushButtonPlot</zorder>
-   <zorder>horizontalLayoutWidget_2</zorder>
-   <zorder>horizontalLayoutWidget_3</zorder>
-   <zorder>comboBoxRange</zorder>
-   <zorder>label_6</zorder>
-   <zorder>pushButtonRange</zorder>
    <zorder>pushButtonCheck</zorder>
+   <zorder>layoutWidget_3</zorder>
+   <zorder>verticalLayoutWidget_2</zorder>
+   <zorder>pushButton</zorder>
+   <zorder>checkBox</zorder>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <widget class="QMenuBar" name="menuBar">
@@ -258,7 +367,7 @@
      <x>0</x>
      <y>0</y>
      <width>1009</width>
-     <height>25</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuAddons">

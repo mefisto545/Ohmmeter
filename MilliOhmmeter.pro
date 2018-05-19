@@ -20,10 +20,13 @@ TEMPLATE = app
 SOURCES += main.cpp\
         mainwindow.cpp \
     qcustomplot.cpp \
-    e6_25.cpp
+    e6_25.cpp \
+    secondwindow.cpp
 
 HEADERS  += mainwindow.h \
     qcustomplot.h \
-    e6_25.h
+    e6_25.h \
+    secondwindow.h
 
-FORMS    += mainwindow.ui
+FORMS    += mainwindow.ui \
+    secondwindow.ui

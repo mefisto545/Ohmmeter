@@ -1,6 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-
+#include "secondwindow.h"
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -383,4 +383,11 @@ void MainWindow::afterCheck(QStringList checkResult)
             ui->pushButtonCompareOnNogo->setStyleSheet(qss);
         }
     }
+}
+
+void MainWindow::on_pushButton_clicked()
+{
+    secondwindow secWin;
+    secWin.setModal(true);
+    secWin.exec();
 }

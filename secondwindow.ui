@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>secondwindow</class>
+ <widget class="QDialog" name="secondwindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>974</width>
+    <height>935</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <widget class="QWidget" name="horizontalLayoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>280</x>
+     <y>0</y>
+     <width>381</width>
+     <height>181</height>
+    </rect>
+   </property>
+   <layout class="QHBoxLayout" name="horizontalLayout_21">
+    <item>
+     <widget class="QWidget" name="fiber8" native="true"/>
+    </item>
+    <item>
+     <widget class="QWidget" name="fiber3" native="true"/>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QWidget" name="verticalLayoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>270</y>
+     <width>381</width>
+     <height>371</height>
+    </rect>
+   </property>
+   <layout class="QVBoxLayout" name="verticalLayout_11">
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout_23">
+      <item>
+       <widget class="QWidget" name="fiber11" native="true"/>
+      </item>
+      <item>
+       <widget class="QWidget" name="fiber16" native="true"/>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout_22">
+      <item>
+       <widget class="QWidget" name="fiber18" native="true"/>
+      </item>
+      <item>
+       <widget class="QWidget" name="fiber7" native="true"/>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QWidget" name="verticalLayoutWidget_2">
+   <property name="geometry">
+    <rect>
+     <x>570</x>
+     <y>270</y>
+     <width>381</width>
+     <height>371</height>
+    </rect>
+   </property>
+   <layout class="QVBoxLayout" name="verticalLayout_12">
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout_24">
+      <item>
+       <widget class="QWidget" name="fiber4" native="true"/>
+      </item>
+      <item>
+       <widget class="QWidget" name="fiber2" native="true"/>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout_25">
+      <item>
+       <widget class="QWidget" name="fiber9" native="true"/>
+      </item>
+      <item>
+       <widget class="QWidget" name="fiber10" native="true"/>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QWidget" name="verticalLayoutWidget_3">
+   <property name="geometry">
+    <rect>
+     <x>380</x>
+     <y>180</y>
+     <width>191</width>
+     <height>561</height>
+    </rect>
+   </property>
+   <layout class="QVBoxLayout" name="verticalLayout_13">
+    <item>
+     <widget class="QWidget" name="fiber14" native="true"/>
+    </item>
+    <item>
+     <widget class="QWidget" name="fiber12" native="true"/>
+    </item>
+    <item>
+     <widget class="QWidget" name="fiber6" native="true"/>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QWidget" name="horizontalLayoutWidget_4">
+   <property name="geometry">
+    <rect>
+     <x>290</x>
+     <y>740</y>
+     <width>381</width>
+     <height>181</height>
+    </rect>
+   </property>
+   <layout class="QHBoxLayout" name="horizontalLayout_26">
+    <item>
+     <widget class="QWidget" name="fiber1" native="true"/>
+    </item>
+    <item>
+     <widget class="QWidget" name="fiber19" native="true"/>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QWidget" name="fiber15" native="true">
+   <property name="geometry">
+    <rect>
+     <x>6</x>
+     <y>8</y>
+     <width>271</width>
+     <height>261</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QWidget" name="fiber5" native="true">
+   <property name="geometry">
+    <rect>
+     <x>660</x>
+     <y>8</y>
+     <width>291</width>
+     <height>261</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QWidget" name="fiber17" native="true">
+   <property name="geometry">
+    <rect>
+     <x>6</x>
+     <y>640</y>
+     <width>281</width>
+     <height>271</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QWidget" name="fiber13" native="true">
+   <property name="geometry">
+    <rect>
+     <x>670</x>
+     <y>640</y>
+     <width>281</width>
+     <height>271</height>
+    </rect>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

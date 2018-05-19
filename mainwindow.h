@@ -60,6 +60,8 @@ private slots:
     void on_pushButtonCheck_clicked();
     void afterCheck(QStringList checkResult);
 
+    void on_pushButton_clicked();
+
 signals:
     void msg(const QString &s);
     void requestConnect(QString portName);
