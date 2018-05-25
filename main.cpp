@@ -8,6 +8,5 @@ int main(int argc, char *argv[])
     w->setWindowTitle("E6-25 v0.2.0");
     w->setAttribute(Qt::WA_DeleteOnClose);
     w->show();
-
     return a.exec();
 }

@@ -203,3 +203,54 @@ void E6_25::check()
 
     emit checkResult(result);
 }
+
+void E6_25::giveResistance()
+{
+    QString result;
+
+    sendData("[?D]");
+    result = readData();
+
+    if(!result.isEmpty())
+    {
+        double resistance = 1;
+        double temp;
+        int index;
+        QString temps;
+        if (!result.contains("Ohm"))
+        {
+            emit resistanceResponce(0);
+            return;
+        }
+        if(result.contains("kOhm"))
+        {
+            resistance *= 1000;
+        } else
+        {
+            if(result.contains("mOhm"))
+            {
+                resistance *=0.001;
+            } else
+            {
+                if(result.contains("MOhm"))
+                {
+                    resistance *=1000000;
+                }
+            }
+        }
+        index = result.indexOf('=');
+        if(index == -1)
+        {
+            emit resistanceResponce(0);
+            return;
+        }
+        temps = QString(result.data() + index+1, 6);
+        temp = temps.toDouble();
+        resistance *= temp;
+
+        emit resistanceResponce(resistance);
+        return;
+    }
+    emit resistanceResponce(0);
+
+}

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>GraphsWindow</class>
+ <widget class="QMainWindow" name="GraphsWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1896</width>
+    <height>1040</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QWidget" name="gridLayoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>1891</width>
+      <height>981</height>
+     </rect>
+    </property>
+    <layout class="QGridLayout" name="gridLayout">
+     <item row="2" column="3">
+      <widget class="QCustomPlot" name="fiber14" native="true"/>
+     </item>
+     <item row="2" column="4">
+      <widget class="QCustomPlot" name="fiber15" native="true"/>
+     </item>
+     <item row="1" column="2">
+      <widget class="QCustomPlot" name="fiber8" native="true"/>
+     </item>
+     <item row="1" column="3">
+      <widget class="QCustomPlot" name="fiber9" native="true"/>
+     </item>
+     <item row="2" column="0">
+      <widget class="QCustomPlot" name="fiber11" native="true"/>
+     </item>
+     <item row="1" column="1">
+      <widget class="QCustomPlot" name="fiber7" native="true"/>
+     </item>
+     <item row="0" column="3">
+      <widget class="QCustomPlot" name="fiber4" native="true"/>
+     </item>
+     <item row="0" column="4">
+      <widget class="QCustomPlot" name="fiber5" native="true"/>
+     </item>
+     <item row="1" column="4">
+      <widget class="QCustomPlot" name="fiber10" native="true"/>
+     </item>
+     <item row="0" column="2">
+      <widget class="QCustomPlot" name="fiber3" native="true"/>
+     </item>
+     <item row="1" column="0">
+      <widget class="QCustomPlot" name="fiber6" native="true"/>
+     </item>
+     <item row="2" column="1">
+      <widget class="QCustomPlot" name="fiber12" native="true"/>
+     </item>
+     <item row="0" column="0">
+      <widget class="QCustomPlot" name="fiber1" native="true"/>
+     </item>
+     <item row="2" column="2">
+      <widget class="QCustomPlot" name="fiber13" native="true"/>
+     </item>
+     <item row="0" column="1">
+      <widget class="QCustomPlot" name="fiber2" native="true"/>
+     </item>
+     <item row="3" column="0">
+      <widget class="QCustomPlot" name="fiber16" native="true"/>
+     </item>
+     <item row="3" column="1">
+      <widget class="QCustomPlot" name="fiber17" native="true"/>
+     </item>
+     <item row="3" column="2">
+      <widget class="QCustomPlot" name="fiber18" native="true"/>
+     </item>
+     <item row="3" column="3">
+      <widget class="QCustomPlot" name="fiber19" native="true"/>
+     </item>
+     <item row="3" column="4">
+      <widget class="QCustomPlot" name="fiber20" native="true"/>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1896</width>
+     <height>21</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>QCustomPlot</class>
+   <extends>QWidget</extends>
+   <header>qcustomplot.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>

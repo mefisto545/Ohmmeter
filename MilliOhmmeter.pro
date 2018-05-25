@@ -21,12 +21,14 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     qcustomplot.cpp \
     e6_25.cpp \
-    secondwindow.cpp
+    graphswindow.cpp \
+    atmega8.cpp
 
 HEADERS  += mainwindow.h \
     qcustomplot.h \
     e6_25.h \
-    secondwindow.h
+    graphswindow.h \
+    atmega8.h
 
 FORMS    += mainwindow.ui \
-    secondwindow.ui
+    graphswindow.ui

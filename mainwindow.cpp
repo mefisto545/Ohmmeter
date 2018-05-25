@@ -1,6 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "secondwindow.h"
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -8,7 +8,9 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
 
     device = new E6_25();
+    avr = new Atmega8();
     tred = new QThread(this);
+    avrtred = new QThread(this);
 
     connect(device, SIGNAL(responce(QString)), this, SLOT(printMsg(QString)));
     connect(this, SIGNAL(requestConnect(QString)), device, SLOT(connect(QString)));
@@ -20,27 +22,45 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(device, SIGNAL(checkResult(QStringList)), this, SLOT(afterCheck(QStringList)));
     connect(device, SIGNAL(connected()), this, SLOT(afterConnect()));
     connect(device, SIGNAL(disconnected()), this, SLOT(afterDisconnect()));
-    connect(device, SIGNAL(graphData(double,double)), this, SLOT(updateGraph(double,double)));
+    connect(device, SIGNAL(graphData(double,double,int)), this, SLOT(updateGraph(double,double,int)));
     connect(device, SIGNAL(plotStopped()), this, SLOT(afterStop()));
     connect(tred, SIGNAL(started()), device, SLOT(onCreation()));
 
 
 
+    connect(avr, SIGNAL(responceAvr(QString)), this, SLOT(printMsgAvr(QString)));
+    connect(this, SIGNAL(requestConnectAvr(QString)), avr, SLOT(connect(QString)));
+    connect(this, SIGNAL(requestDisconnectAvr()), avr, SLOT(disconnect()));
+    connect(this, SIGNAL(requestSendAndReadAvr(QString)), avr, SLOT(sendAndReadAvr(QString)));
+    connect(avr, SIGNAL(connectedAvr()), this, SLOT(afterConnectAvr()));
+    connect(avr, SIGNAL(disconnectedAvr()), this, SLOT(afterDisconnectAvr()));
+    connect(avrtred, SIGNAL(started()), avr, SLOT(onCreation()));
+
+    connect(this, SIGNAL(requestAvrPlot()), avr, SLOT(plotStart()));
+    connect(avr,SIGNAL(resistanceRequest()), device, SLOT(giveResistance()));
+    connect(device, SIGNAL(resistanceResponce(double)), avr, SLOT(plotGotResistance(double)));
+    connect(avr, SIGNAL(plotRequest(double,double,int)), this, SLOT(updateGraph(double,double,int)));
+    connect(this, SIGNAL(requestAvrPlotStop()), avr, SLOT(plotStop()));
+    connect(avr, SIGNAL(plotStopped()), this, SLOT(afterStop()));
 
     device->moveToThread(tred);
     tred->start();
-
-
+    avr->moveToThread(avrtred);
+    avrtred->start();
 
     on_actionComUpd_triggered();
 
     ui->pushButtonSend->setDisabled(true);
     ui->pushButtonRecieve->setDisabled(true);
 
-    ui->lineEditResponce->setText("Hello there!");
-
     ui->lineEditCommand->setDisabled(true);
     ui->lineEditResponce->setDisabled(true);
+
+    ui->pushButtonSend_2->setDisabled(true);
+    ui->pushButtonRecieve_2->setDisabled(true);
+
+    ui->lineEditCommand_2->setDisabled(true);
+    ui->lineEditResponce_2->setDisabled(true);
 
     ui->widgetPlot->addGraph();
 
@@ -71,6 +91,7 @@ void MainWindow::closeEvent(QCloseEvent *event)//Перед закрытием �
 {
     device->deleteLater();
     tred->exit();
+    avrtred->exit();
     QMainWindow::closeEvent(event);
 }
 
@@ -83,10 +104,12 @@ MainWindow::~MainWindow()
 void MainWindow::on_actionComUpd_triggered()
 {
     ui->comboBoxPortName->clear();
+    ui->comboBoxPortName_2->clear();
 
     foreach (const QSerialPortInfo &info,
              QSerialPortInfo::availablePorts()) {
         ui->comboBoxPortName->addItem(info.portName());
+        ui->comboBoxPortName_2->addItem(info.portName());
     }
 
     return;
@@ -120,6 +143,21 @@ void MainWindow::afterConnect()
 
 }
 
+void MainWindow::afterConnectAvr()
+{
+
+    ui->pushButtonConnect_2->setText("Disconnect");
+
+    ui->comboBoxPortName_2->setEnabled(false);
+
+    ui->lineEditCommand_2->setEnabled(true);
+    ui->lineEditResponce_2->setEnabled(true);
+
+    ui->pushButtonRecieve_2->setEnabled(true);
+    ui->pushButtonSend_2->setEnabled(true);
+
+}
+
 void MainWindow::afterDisconnect()
 {
     ui->pushButtonConnect->setText("Connect");
@@ -133,9 +171,27 @@ void MainWindow::afterDisconnect()
     ui->pushButtonSend->setEnabled(false);
 }
 
+void MainWindow::afterDisconnectAvr()
+{
+    ui->pushButtonConnect_2->setText("Connect");
+
+    ui->comboBoxPortName_2->setEnabled(true);
+
+    ui->lineEditCommand_2->setEnabled(false);
+    ui->lineEditResponce_2->setEnabled(false);
+
+    ui->pushButtonRecieve_2->setEnabled(false);
+    ui->pushButtonSend_2->setEnabled(false);
+}
+
 void MainWindow::printMsg(const QString &s)
 {
     ui->lineEditResponce->setText(s);
+}
+
+void MainWindow::printMsgAvr(const QString &s)
+{
+    ui->lineEditResponce_2->setText(s);
 }
 
 void MainWindow::on_pushButtonSend_clicked()
@@ -149,7 +205,10 @@ void MainWindow::on_pushButtonRecieve_clicked()
     emit requestSendAndRead("");
 }
 
-
+void MainWindow::on_pushButtonRecieve_2_clicked()
+{
+    emit requestSendAndReadAvr("");
+}
 
 void MainWindow::on_pushButtonControlOn_clicked()
 {
@@ -163,14 +222,23 @@ void MainWindow::on_pushButtonControlOff_clicked()
 
 void MainWindow::on_pushButtonPlot_clicked()
 {
+    multiMode = ui->checkBox->isChecked();
     if(ui->pushButtonPlot->text() == "Plot")
     {
-        ui->widgetPlot->graph(0)->data().data()->clear();
-        emit requestPlot();
+        if(!multiMode)
+        {
+            ui->widgetPlot->graph(0)->data().data()->clear();
+            emit requestPlot();
+        }else
+        {
+            graphs.clear();
+            emit requestAvrPlot();
+        }
         ui->pushButtonPlot->setText("Stop");
     } else
     {
         emit requestPlotStop();
+        emit requestAvrPlotStop();
     }
 }
 
@@ -179,13 +247,17 @@ void MainWindow::afterStop()
     ui->pushButtonPlot->setText("Plot");
 }
 
-void MainWindow::updateGraph(double resistance, double time)
+void MainWindow::updateGraph(double resistance, double time, int fiberNumber = 0)
 {
+    if(multiMode)
+        graphs.updateGraphs(resistance, time, fiberNumber);
+    else{
     ui->widgetPlot->graph(0)->addData(time,resistance);
     ui->widgetPlot->yAxis->setRange(0, 1);
     ui->widgetPlot->rescaleAxes();
     ui->widgetPlot->yAxis->scaleRange(1.1);
     ui->widgetPlot->replot();
+    }
 }
 
 void MainWindow::on_pushButtonFast_clicked()
@@ -387,7 +459,25 @@ void MainWindow::afterCheck(QStringList checkResult)
 
 void MainWindow::on_pushButton_clicked()
 {
-    secondwindow secWin;
-    secWin.setModal(true);
-    secWin.exec();
+    graphs.setWindowTitle("feel yourself as a guard");
+    graphs.show();
+}
+
+void MainWindow::on_pushButtonConnect_2_clicked()
+{
+    ui->lineEditCommand_2->setText("Enter your message here!");
+
+    if (ui->pushButtonConnect_2->text() == "Connect")
+    {
+        emit requestConnectAvr(ui->comboBoxPortName_2->currentText());
+    } else
+    {
+        emit requestDisconnectAvr();
+    }
+}
+
+void MainWindow::on_pushButtonSend_2_clicked()
+{
+    emit requestSendAndReadAvr(ui->lineEditCommand_2->text());
+    return;
 }
