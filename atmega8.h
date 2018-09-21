@@ -20,6 +20,9 @@ public:
     bool run;
     QFile* reserveFile;
     int currentFiber = 1;
+    int currentPoint = 1;
+    double timeArr[20][4], resArr[20][4];
+    QString dataString = {};
 
 signals:
     void responceAvr(QString msg);

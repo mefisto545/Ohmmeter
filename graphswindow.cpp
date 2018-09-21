@@ -25,7 +25,7 @@ GraphsWindow::GraphsWindow(QWidget *parent) :
     ui->fiber17->addGraph();
     ui->fiber18->addGraph();
     ui->fiber19->addGraph();
-    ui->fiber20->addGraph();
+    //ui->fiber20->addGraph();
 
 }
 
@@ -152,12 +152,12 @@ void GraphsWindow::updateGraphs(double resistance, double time, int fiberNumber)
         ui->fiber19->yAxis->scaleRange(1.1);
         ui->fiber19->replot();
         break;
-    case 20:
+    /*case 20:
         ui->fiber20->graph(0)->addData(time,resistance);
         ui->fiber20->rescaleAxes();
         ui->fiber20->yAxis->scaleRange(1.1);
         ui->fiber20->replot();
-        break;
+        break;*/
     }
 }
 
@@ -182,5 +182,5 @@ void GraphsWindow::clear()
     ui->fiber17->graph(0)->data().data()->clear();
     ui->fiber18->graph(0)->data().data()->clear();
     ui->fiber19->graph(0)->data().data()->clear();
-    ui->fiber20->graph(0)->data().data()->clear();
+    //ui->fiber20->graph(0)->data().data()->clear();
 }

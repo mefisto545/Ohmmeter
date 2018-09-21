@@ -64,15 +64,12 @@ void Atmega8::disconnect()
 void Atmega8::plotStart()
 {
     time.start();
-
+    currentFiber = 1;
     run = true;
-    QString lalala;
-
-
 
     reserveFile->setFileName(QDateTime::currentDateTime().toString("yy_M_d_hh_mm_ss") + ".dat");
     reserveFile->open(QIODevice::WriteOnly);
-    reserveFile->write(" \n");
+    reserveFile->write("Time1, Resistance1, Time2, Resistance2, Time3, Resistance3, Time4, Resistance4, Time5, Resistance5, Time6, Resistance6, Time7, Resistance7, Time8, Resistance8, Time9, Resistance9, Time10, Resistance10, Time11, Resistance11, Time12, Resistance12, Time13, Resistance13, Time14, Resistance14, Time15, Resistance15, Time16, Resistance16, Time17, Resistance17, Time18, Resistance18, Time19, Resistance19, Time20, Resistance20\n");
     plotBegin();
 //    while(run)
 //    {
@@ -146,9 +143,6 @@ void Atmega8::plotBegin()
     case 19:
         sendAndReadAvr("j");
         break;
-    case 20:
-        sendAndReadAvr("k");
-        break;
     default:
         break;
     }
@@ -156,6 +150,7 @@ void Atmega8::plotBegin()
 
 void Atmega8::plotChangedFiber(QString responce)
 {
+    //QThread::msleep(800);
     if(!run)
     {
         emit plotStopped();
@@ -166,7 +161,7 @@ void Atmega8::plotChangedFiber(QString responce)
         emit resistanceRequest();
     } else
     {
-        if(currentFiber == 20)
+        if(currentFiber == 19)
         {
             currentFiber = 1;
         } else
@@ -181,21 +176,39 @@ void Atmega8::plotChangedFiber(QString responce)
 
 void Atmega8::plotGotResistance(double resistance)
 {
+    QString str;
     if(resistance != 0)
     {
-        emit plotRequest(resistance, time.elapsed()/1000.0, currentFiber);
+        if(currentPoint==4)// || currentPoint==3)
+            emit plotRequest(resistance, time.elapsed()/1000.0, currentFiber);
+        timeArr[currentFiber-1][currentPoint-1] = time.elapsed()/1000.0;
+        resArr[currentFiber-1][currentPoint-1] = resistance;
     }
-//    while(time.elapsed() % 100 > 5)
-//    {
-//        QThread::msleep(1);
-//    }
+
     QApplication::processEvents(QEventLoop::AllEvents,1);
-    if(currentFiber == 20)
+    if(currentFiber == 19 && currentPoint == 4)
     {
+        str.clear();
+        for(int j=3; j < 4; j++)
+        {
+            for(int i=0; i < 19; i++)
+             str += QString::number(timeArr[i][j], 'g', 5) + ", " + QString::number(resArr[i][j], 'g', 5) + ", ";
+            str += '\n';
+        }
+        reserveFile->write(str.toLocal8Bit());
+        reserveFile->flush();
         currentFiber = 1;
-    } else
+        currentPoint = 1;
+    }
+    else
     {
-        currentFiber++;
+        if(currentPoint == 4)
+        {
+            currentFiber++;
+            currentPoint = 1;
+        }
+        else
+            currentPoint++;
     }
     if(run)
     {
